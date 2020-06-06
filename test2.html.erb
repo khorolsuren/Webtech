@@ -34,5 +34,18 @@
       <input type="text" name="goya_false" value="<%= data_false.join(' ') %>">
       <input type="submit" name="送信" >
     </form>
+    
+    <h2>テスト</h2>
+    <% result_give_for = connection.exec("SELECT COUNT(*), give_for FROM crops GROUP BY give_for;")%>
+    <% data_give_for = [] %>
+    <% result_give_for.each do |record_give_for| %>
+      <% data_give_for << "回数:#{record_give_for["count"]} 譲渡先:#{record_give_for["give_for"]}" %>
+    <% end %>
+    <form action="goya.cgi" method="POST">
+      テスト（ボタンのみで移行）
+      <!-- <input type="text" name="goya2" value="<%= data_give_for.join(' ') %>"> -->
+      <!-- <input type="submit" name="送信" > -->
+      <button type='submit' name='goya2' value="<%= data_give_for.join('<br>') %>">テスト</button>
+    </form>
   </body>
 </html>
